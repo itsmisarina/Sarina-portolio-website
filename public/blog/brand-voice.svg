@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Brand voice prompt engineering abstract graphic">
+  <rect width="1200" height="750" fill="#050816"/>
+  <rect x="160" y="135" width="880" height="480" rx="28" fill="#0B1120" stroke="#334155"/>
+  <rect x="210" y="195" width="380" height="42" rx="21" fill="#22d3ee" opacity=".28"/>
+  <rect x="210" y="270" width="690" height="28" rx="14" fill="#8b5cf6" opacity=".32"/>
+  <rect x="210" y="330" width="560" height="28" rx="14" fill="#38bdf8" opacity=".24"/>
+  <rect x="210" y="390" width="740" height="28" rx="14" fill="#ffffff" opacity=".1"/>
+  <circle cx="880" cy="220" r="82" fill="#22d3ee" opacity=".12"/>
+  <circle cx="920" cy="260" r="92" fill="#8b5cf6" opacity=".15"/>
+  <text x="210" y="540" fill="#fff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Consistent Brand Voice</text>
+  <text x="212" y="590" fill="#a5f3fc" font-family="Arial, sans-serif" font-size="24">Prompt systems for polished content</text>
+</svg>

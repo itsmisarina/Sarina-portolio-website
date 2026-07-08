@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Marketing automation abstract workflow graphic">
+  <rect width="1200" height="750" fill="#050816"/>
+  <g fill="#0B1120" stroke="#334155" stroke-width="2">
+    <rect x="145" y="250" width="210" height="130" rx="22"/>
+    <rect x="495" y="155" width="210" height="130" rx="22"/>
+    <rect x="845" y="250" width="210" height="130" rx="22"/>
+    <rect x="495" y="465" width="210" height="130" rx="22"/>
+  </g>
+  <g stroke="#22d3ee" stroke-width="5" fill="none" opacity=".72">
+    <path d="M355 315C430 315 420 220 495 220"/>
+    <path d="M705 220C780 220 770 315 845 315"/>
+    <path d="M950 380C950 525 705 530 705 530"/>
+    <path d="M495 530C360 530 250 455 250 380"/>
+  </g>
+  <g fill="#8b5cf6" opacity=".35">
+    <circle cx="250" cy="315" r="42"/>
+    <circle cx="600" cy="220" r="42"/>
+    <circle cx="950" cy="315" r="42"/>
+    <circle cx="600" cy="530" r="42"/>
+  </g>
+  <text x="150" y="675" fill="#fff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Automation That Feels Human</text>
+</svg>

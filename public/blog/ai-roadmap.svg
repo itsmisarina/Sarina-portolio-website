@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="AI marketing roadmap abstract graphic">
+  <rect width="1200" height="750" fill="#050816"/>
+  <path d="M0 620C190 520 312 610 480 500C642 394 708 258 920 300C1055 327 1120 230 1200 180V750H0Z" fill="#0B1120"/>
+  <circle cx="280" cy="220" r="130" fill="#22d3ee" opacity=".16"/>
+  <circle cx="870" cy="290" r="170" fill="#8b5cf6" opacity=".18"/>
+  <g stroke="#38bdf8" stroke-width="3" opacity=".55" fill="none">
+    <path d="M250 485C390 360 540 420 650 300S865 185 1000 230"/>
+    <path d="M250 485h-70m220-98h-70m310-74h-70m300-82h-70"/>
+  </g>
+  <g fill="#ffffff" font-family="Arial, sans-serif" font-weight="700">
+    <text x="150" y="545" font-size="48">AI Marketing Roadmap</text>
+    <text x="153" y="595" font-size="24" fill="#a5f3fc">Strategy • Automation • Growth</text>
+  </g>
+</svg>
