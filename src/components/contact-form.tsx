@@ -2,39 +2,66 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { contactSchema, type ContactFormInput } from "@/lib/contact-schema";
+
+const formSubmitUrl = "https://formsubmit.co/itsmisarina@gmail.com";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormInput>({
     resolver: zodResolver(contactSchema),
     defaultValues: { company: "" },
   });
 
+  useEffect(() => {
+    if (window.location.search.includes("sent=1")) {
+      window.setTimeout(() => setStatus("success"), 0);
+    }
+  }, []);
+
   async function onSubmit(values: ContactFormInput) {
-  setStatus("idle");
+    setStatus("idle");
 
-  const response = await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(values),
-  });
+    if (values.company) {
+      setStatus("error");
+      return;
+    }
 
-  if (!response.ok) {
-    setStatus("error");
-    return;
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = formSubmitUrl;
+    form.style.display = "none";
+
+    const fields: Record<string, string> = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone || "Not provided",
+      subject: values.subject,
+      message: values.message,
+      _replyto: values.email,
+      _subject: `Digital Sarina inquiry: ${values.subject}`,
+      _template: "table",
+      _captcha: "false",
+      _next: `${window.location.origin}/contact?sent=1`,
+    };
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
   }
-
-  reset();
-  setStatus("success");
-}
 
 
   return (
