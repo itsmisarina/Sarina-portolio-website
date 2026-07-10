@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { contactSchema, type ContactFormInput } from "@/lib/contact-schema";
 
-const formSubmitUrl = "https://formsubmit.co/itsmisarina@gmail.com";
+const contactEmail = "itsmisarina@gmail.com";
+const formSubmitUrl = `https://formsubmit.co/ajax/${contactEmail}`;
 
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "fallback" | "error">("idle");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormInput>({
     resolver: zodResolver(contactSchema),
@@ -33,12 +35,7 @@ export function ContactForm() {
       return;
     }
 
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = formSubmitUrl;
-    form.style.display = "none";
-
-    const fields: Record<string, string> = {
+    const fields = {
       name: values.name,
       email: values.email,
       phone: values.phone || "Not provided",
@@ -48,19 +45,34 @@ export function ContactForm() {
       _subject: `Digital Sarina inquiry: ${values.subject}`,
       _template: "table",
       _captcha: "false",
-      _next: `${window.location.origin}/contact?sent=1`,
     };
 
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    });
+    try {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 8000);
 
-    document.body.appendChild(form);
-    form.submit();
+      const response = await fetch(formSubmitUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fields),
+        signal: controller.signal,
+      });
+
+      window.clearTimeout(timeout);
+
+      if (!response.ok) {
+        throw new Error("FormSubmit unavailable");
+      }
+
+      reset();
+      setStatus("success");
+    } catch {
+      openEmailFallback(values);
+      setStatus("fallback");
+    }
   }
 
 
@@ -98,9 +110,28 @@ export function ContactForm() {
         Send Message
       </button>
       {status === "success" ? <p className="text-sm font-medium text-cyan-200">Message sent. Sarina will get back to you soon.</p> : null}
+      {status === "fallback" ? (
+        <p className="text-sm font-medium text-cyan-200">
+          FormSubmit is temporarily unavailable, so an email draft opened with your message.
+        </p>
+      ) : null}
       {status === "error" ? <p className="text-sm font-medium text-rose-300">Something went wrong. Please try again or email directly.</p> : null}
     </form>
   );
+}
+
+function openEmailFallback(values: ContactFormInput) {
+  const body = [
+    `Name: ${values.name}`,
+    `Email: ${values.email}`,
+    `Phone: ${values.phone || "Not provided"}`,
+    "",
+    values.message,
+  ].join("\n");
+
+  window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(
+    `Digital Sarina inquiry: ${values.subject}`,
+  )}&body=${encodeURIComponent(body)}`;
 }
 
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
