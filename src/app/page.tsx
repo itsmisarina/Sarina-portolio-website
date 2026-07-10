@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { Star } from "lucide-react";
 import { BlogCard } from "@/components/blog-card";
 import { CTA } from "@/components/cta";
@@ -52,9 +53,17 @@ export default function Home() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <Reveal>
-            <div className="aspect-[4/5] rounded-lg border border-white/10 bg-[linear-gradient(145deg,rgba(34,211,238,0.16),rgba(139,92,246,0.18),rgba(255,255,255,0.05))] p-6">
-              <div className="flex h-full items-end rounded-lg border border-white/10 bg-[#0B1120]/70 p-6">
-                <div>
+            <div className="aspect-[4/5] overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(145deg,rgba(34,211,238,0.16),rgba(139,92,246,0.18),rgba(255,255,255,0.05))] p-6">
+              <div className="relative flex h-full items-end overflow-hidden rounded-lg border border-white/10 bg-[#0B1120]/70 p-6">
+                <Image
+                  src="/images/dp.PNG"
+                  alt="Sarina Potrel"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050816] via-[#050816]/70 to-transparent" />
+                <div className="relative z-10">
                   <p className="text-sm uppercase tracking-[0.24em] text-cyan-200">Professional Photo</p>
                   <h2 className="mt-3 text-3xl font-bold text-white">{brand.owner}</h2>
                   <p className="mt-2 text-slate-300">{brand.title}</p>

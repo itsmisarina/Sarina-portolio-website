@@ -37,16 +37,9 @@ export async function POST(request: Request) {
       }),
     });
 
-    const result = await response.text();
-console.log("FormSubmit response:", response.status, result);
-
-if (!response.ok) {
-  return NextResponse.json(
-    { error: result },
-    { status: response.status }
-  );
-}
-
+    if (!response.ok) {
+      return NextResponse.json({ error: "Unable to send message." }, { status: 502 });
+    }
 
     return NextResponse.json({ message: "Message sent successfully." }, { status: 200 });
   } catch (error) {

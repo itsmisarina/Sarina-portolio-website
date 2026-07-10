@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { Award, HeartHandshake } from "lucide-react";
 import { CTA } from "@/components/cta";
 import { Button } from "@/components/ui/button";
@@ -32,7 +33,16 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <GlassCard className="p-8">
-              <div className="aspect-[16/12] rounded-lg border border-white/10 bg-[linear-gradient(135deg,rgba(34,211,238,0.2),rgba(139,92,246,0.16),rgba(255,255,255,0.06))]" />
+              <div className="relative aspect-[16/12] overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(135deg,rgba(34,211,238,0.2),rgba(139,92,246,0.16),rgba(255,255,255,0.06))]">
+                <Image
+                  src="/images/ai.dp.PNG"
+                  alt="Sarina Potrel"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
               <h2 className="mt-6 text-2xl font-bold text-white">{brand.owner}</h2>
               <p className="mt-2 text-cyan-200">{brand.title}</p>
               <p className="mt-4 leading-7 text-slate-300">
